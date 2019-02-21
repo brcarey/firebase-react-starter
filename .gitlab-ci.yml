@@ -1,0 +1,35 @@
+image: node:11
+
+variables:
+  NODE_ENV: production
+
+stages:
+  - build
+  - deploy
+build:
+  stage: build
+  cache:
+    paths:
+      - node_modules/
+      - functions/node_modules/
+      - web/node_modules/
+  script:
+  - yarn install
+  - yarn bootstrap
+  - yarn lint
+  - yarn build
+  - yarn test
+  artifacts:
+    paths:
+      - functions/
+      - web/
+deploy:
+  stage: deploy
+  script:
+  - npm install -g firebase-tools
+  - firebase deploy -m "Pipeline $CI_PIPELINE_ID, build $CI_BUILD_ID" --non-interactive --token "$FIREBASE_TOKEN"
+  environment:
+    name: demo
+    url: https://firestarter-example.firebaseapp.com/
+  only:
+  - master

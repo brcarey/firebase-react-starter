@@ -1,0 +1,12 @@
+## Compiled JavaScript files
+**/*.js
+**/*.js.map
+
+# Typescript v1 declaration files
+typings/
+
+lib/
+
+src/graphql/schema/index.d.ts
+
+node_modules/

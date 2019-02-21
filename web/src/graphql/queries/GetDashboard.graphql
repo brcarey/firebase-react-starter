@@ -1,0 +1,12 @@
+query getDashboard {
+  me {
+    firstName
+    lastName
+  }
+  gallery {
+    id
+    imageUrl
+    heading
+    description
+  }
+}
