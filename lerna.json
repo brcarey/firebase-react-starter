@@ -1,5 +1,5 @@
 {
-  "packages": ["web", "functions"],
+  "packages": ["web", "functions", "chain"],
   "npmClient": "yarn",
   "version": "0.1.0"
 }

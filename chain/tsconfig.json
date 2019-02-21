@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "target": "ES2017",
+    "noImplicitAny": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "outDir": "build",
+    "skipLibCheck": true,
+    "typeRoots": ["./node_modules/@types", "./typings"]
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["build/**/*.ts"]
+}

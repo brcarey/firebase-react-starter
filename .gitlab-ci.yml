@@ -1,4 +1,4 @@
-image: node:11
+image: node:11.10
 
 variables:
   NODE_ENV: production
@@ -11,25 +11,28 @@ build:
   cache:
     paths:
       - node_modules/
-      - functions/node_modules/
       - web/node_modules/
+      - functions/node_modules/
+      - chain/node_modules/
   script:
-  - yarn install
-  - yarn bootstrap
-  - yarn lint
-  - yarn build
-  - yarn test
+    - yarn install
+    - yarn bootstrap
+    - yarn lint
+    - yarn build
+    - yarn test
   artifacts:
     paths:
       - functions/
       - web/
+      - chain/
 deploy:
   stage: deploy
   script:
-  - npm install -g firebase-tools
-  - firebase deploy -m "Pipeline $CI_PIPELINE_ID, build $CI_BUILD_ID" --non-interactive --token "$FIREBASE_TOKEN"
+    - WEB3_URL="$WEB3_URL" yarn --cwd chain deploy:ci
+    - npm install -g firebase-tools
+    - firebase deploy -m "Pipeline $CI_PIPELINE_ID, build $CI_BUILD_ID" --non-interactive --token "$FIREBASE_TOKEN"
   environment:
     name: demo
     url: https://firestarter-example.firebaseapp.com/
   only:
-  - master
+    - master
